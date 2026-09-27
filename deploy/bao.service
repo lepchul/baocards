@@ -1,0 +1,21 @@
+[Unit]
+Description=Bao Cards Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bao
+WorkingDirectory=/opt/bao-cards
+EnvironmentFile=/opt/bao-cards/.env
+ExecStart=/opt/bao-cards/.venv/bin/python /opt/bao-cards/bot.py
+Restart=always
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/bao-cards/data
+
+[Install]
+WantedBy=multi-user.target

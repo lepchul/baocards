@@ -1,0 +1,19 @@
+services:
+  bao:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_PATH: /app/data/bao.sqlite3
+      CONFIG_PATH: /app/config.json
+    volumes:
+      - bao_data:/app/data
+      - ./config.json:/app/config.json:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    stop_grace_period: 30s
+volumes:
+  bao_data:
